@@ -1,4 +1,4 @@
-package id.ac.umn.uasmap2022;
+package id.ac.umn.map_uas_2022;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("id.ac.umn.uasmap2022", appContext.getPackageName());
+        assertEquals("id.ac.umn.map_uas_2022", appContext.getPackageName());
     }
 }

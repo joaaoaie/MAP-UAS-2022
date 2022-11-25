@@ -1,4 +1,4 @@
-package id.ac.umn.uasmap2022;
+package id.ac.umn.map_uas_2022;
 
 import org.junit.Test;
 

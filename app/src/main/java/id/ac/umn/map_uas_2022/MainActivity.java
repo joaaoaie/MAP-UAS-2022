@@ -1,4 +1,4 @@
-package id.ac.umn.uasmap2022;
+package id.ac.umn.map_uas_2022;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import id.ac.umn.uasmap2022.databinding.ActivityMainBinding;
+import id.ac.umn.map_uas_2022.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
