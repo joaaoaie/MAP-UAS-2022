@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MAP-UAS-2022</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_myInformations">My Informations</string>
+
+    <string name="my_name">My Name</string>
+    <string name="default_notification_channel_id">Chats</string>
+    <string name="placeholder_text">Fragment Placeholder</string>
 </resources>

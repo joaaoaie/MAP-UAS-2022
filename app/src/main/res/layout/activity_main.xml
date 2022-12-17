@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+    tools:context=".MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_placeholder" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -13,21 +19,55 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/BottomNavBarColor"
+        app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <fragment
-        android:id="@+id/nav_host_fragment_activity_main"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/mobile_navigation" />
+<!--    <GridLayout-->
+<!--        android:id="@+id/bottom_navbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:columnCount="3"-->
+<!--        android:rowCount="1">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_contacts"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_columnWeight="@integer/material_motion_duration_short_1"-->
+<!--            android:layout_column="0"-->
+<!--            android:layout_row="0"-->
+<!--            android:text="@string/title_contacts"-->
+<!--            android:onClick="openContacts"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_chats"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_columnWeight="@integer/material_motion_duration_short_1"-->
+<!--            android:layout_column="1"-->
+<!--            android:layout_row="0"-->
+<!--            android:text="@string/title_chats"-->
+<!--            android:onClick="openChats"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_myInformations"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_columnWeight="@integer/material_motion_duration_short_1"-->
+<!--            android:layout_column="2"-->
+<!--            android:layout_row="0"-->
+<!--            android:text="@string/title_myInformations"-->
+<!--            android:onClick="openMyInformations"/>-->
+
+<!--    </GridLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

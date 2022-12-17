@@ -1,37 +1,88 @@
 package id.ac.umn.map_uas_2022;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import id.ac.umn.map_uas_2022.databinding.ActivityMainBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    BottomNavigationView navView;
+
+    String name; // temporary testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        navView = findViewById(R.id.nav_view);
+        navView.getMenu().findItem(R.id.navigation_contacts).setOnMenuItemClickListener(item -> {
+            contactsPage();
+            return true;
+        });
+        navView.getMenu().findItem(R.id.navigation_myInformations).setOnMenuItemClickListener(item -> {
+            myInformationsPage();
+            return true;
+        });
+        navView.getMenu().findItem(R.id.navigation_chats).setOnMenuItemClickListener(item -> {
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+            chatsPage();
+            return true;
+        });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 
+    void myInformationsPage() {
+        MyInformations myInformations = new MyInformations();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myInformations).commit();
+        navView.getMenu().findItem(R.id.navigation_myInformations).setChecked(true);
+
+        // temporary testing
+//        name = "John Doe";
+//        myInformations.setDisplayName(name);
+//        Log.d(TAG, "myInformationsPage success");
+    }
+
+    void contactsPage() {
+        Contacts contacts = new Contacts();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, contacts).commit();
+        navView.getMenu().findItem(R.id.navigation_contacts).setChecked(true);
+    }
+
+    void chatsPage() {
+        Chats chats = new Chats();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, chats).commit();
+        navView.getMenu().findItem(R.id.navigation_chats).setChecked(true);
+    }
 }
