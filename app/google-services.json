@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "336642457837",
+    "firebase_url": "https://mobile-app-programming-2022-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mobile-app-programming-2022",
+    "storage_bucket": "mobile-app-programming-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336642457837:android:fdb6a5a1ddd8f9ad6ccce4",
+        "android_client_info": {
+          "package_name": "id.ac.umn.map_uas_2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336642457837-sr880fieldeh3oqefgujf86emonqc21s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5I2lEtdFjcfyuoSn_xcTODw_FcOZ29XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336642457837-sr880fieldeh3oqefgujf86emonqc21s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
