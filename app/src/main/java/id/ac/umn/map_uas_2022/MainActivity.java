@@ -1,25 +1,13 @@
 package id.ac.umn.map_uas_2022;
 
-import static android.content.ContentValues.TAG;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-
-    private MyInformations myInformations;
-    private Chats chats;
-    private Contacts contacts;
 
     BottomNavigationView navView;
 
@@ -57,27 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 myInformationsPage();
             }
         }
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
-//
-//        myRef.setValue("Hello, World!");
-//
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
     }
 
     @Override
@@ -94,10 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
     void myInformationsPage() {
         Bundle bundle = new Bundle();
-        bundle.putString("name", "John Doe");
-
-        // temporary testing
-        Log.d(TAG, "myInformationsPage success");
+//        Imagine that this is the person who logged in
+        bundle.putString("username", "JonathanO");
+//        bundle.putString("username", "JonathanOctavien");
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, MyInformations.class, bundle).commit();
         navView.getMenu().findItem(R.id.navigation_myInformations).setChecked(true);

@@ -3,6 +3,7 @@ package id.ac.umn.map_uas_2022;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MyInformations extends Fragment {
 
@@ -24,8 +28,21 @@ public class MyInformations extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        String name = requireArguments().getString("name");
-        setDisplayName(name);
+        String username = requireArguments().getString("username");
+
+        // take name from database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User/" + username + "/name");
+        myRef.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                String name = String.valueOf(task.getResult().getValue());
+                Log.d("firebase", name);
+                setDisplayName(name);
+            }
+        });
 
         setSettingsButton();
 
