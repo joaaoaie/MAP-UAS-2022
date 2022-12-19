@@ -14,7 +14,7 @@ public class MyInformationsSettings extends AppCompatActivity {
     String username;
 
     EditText displayName, email, password;
-    Button saveButton;
+    Button saveButton, deleteAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,11 @@ public class MyInformationsSettings extends AppCompatActivity {
             myRef.child("name").setValue(displayName.getText().toString());
             myRef.child("email").setValue(email.getText().toString());
             myRef.child("password").setValue(password.getText().toString());
+            finish();
+        });
+        deleteAccountButton = findViewById(R.id.deleteAccountButton);
+        deleteAccountButton.setOnClickListener(v -> {
+            myRef.removeValue();
             finish();
         });
     }

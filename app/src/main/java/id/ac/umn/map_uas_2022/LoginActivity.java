@@ -1,63 +1,73 @@
-package id.ac.umn.dotapp;
+package id.ac.umn.map_uas_2022;
 
-import android.support.v7.app.AppCompatActivity;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity  {
-    Button bt1,bt2;
-    EditText et1,et2;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-    TextView tv1;
-    int counter = 3;
+
+public class LoginActivity extends AppCompatActivity {
+    Button loginButton, cancelButton;
+    EditText usernameText, passwordText;
+
+    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        bt1 = (Button)findViewById(R.id.button);
-        et1 = (EditText)findViewById(R.id.editText);
-        et2 = (EditText)findViewById(R.id.editText2);
+        loginButton = (Button) findViewById(R.id.loginButton);
+        usernameText = (EditText) findViewById(R.id.usernameText);
+        passwordText = (EditText) findViewById(R.id.passwordText);
 
-        bt2 = (Button)findViewById(R.id.button2);
-        tv1 = (TextView)findViewById(R.id.textView3);
-        tv1.setVisibility(View.GONE);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
 
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(et1.getText().toString().equals("admin") &&
-                        et2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Redirecting...",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+        loginButton.setOnClickListener(v -> {
+//            if(usernameText.getText().toString().equals("admin") &&
+//                    passwordText.getText().toString().equals("admin")) {
+//                Toast.makeText(getApplicationContext(),
+//                        "Redirecting...",Toast.LENGTH_SHORT).show();
+//            }else{
+//                Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
+//            }
+            username = usernameText.getText().toString();
+            password = passwordText.getText().toString();
 
-                            tv1.setVisibility(View.VISIBLE);
-                    tv1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tv1.setText(Integer.toString(counter));
-
-                    if (counter == 0) {
-                        bt1.setEnabled(false);
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User/" + username);
+            myRef.child("password").get().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    String password = String.valueOf(task.getResult().getValue());
+                    Log.d("firebase", password);
+                    if (comparePassword(password)) {
+                        Log.d("firebase", "Password match");
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("username", username);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Username or Password is Incorrect", Toast.LENGTH_LONG).show();
+                        usernameText.setText("");
+                        passwordText.setText("");
+                        Log.d("firebase", "Password doesn't match");
                     }
                 }
-            }
+            });
         });
 
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        cancelButton.setOnClickListener(v -> finish());
+    }
+
+    private boolean comparePassword(String password) {
+        return this.password.equals(password);
     }
 }

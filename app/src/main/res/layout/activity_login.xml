@@ -8,88 +8,59 @@
     <TextView android:text = "Login" android:layout_width="wrap_content"
         android:layout_height = "wrap_content"
         android:id = "@+id/textview"
-        android:textSize = "35dp"
+        android:textSize = "35sp"
         android:layout_alignParentTop = "true"
-        android:layout_centerHorizontal = "true" />
-
-    <TextView
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "Tutorials point"
-        android:id = "@+id/textView"
-        android:layout_below = "@+id/textview"
         android:layout_centerHorizontal = "true"
-        android:textColor = "#000000"
-        android:textSize = "35dp" />
+        tools:ignore="HardcodedText" />
+
 
     <EditText
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/editText"
-        android:hint = "Enter Name"
-        android:focusable = "true"
-        android:textColorHighlight = "#000000"
-        android:textColorHint = "#6c6c6c"
-        android:layout_marginTop = "46dp"
-        android:layout_alignParentLeft = "true"
-        android:layout_alignParentStart = "true"
-        android:layout_alignParentRight = "true"
-        android:layout_alignParentEnd = "true" />
-
+        android:id="@+id/usernameText"
+        android:autofillHints="username"
+        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="1dp"
+        android:focusable="true"
+        android:hint="Enter Username"
+        android:textColorHighlight="#000000"
+        android:textColorHint="#6c6c6c"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="password"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
+        android:id="@+id/passwordText"
+        android:layout_below="@+id/usernameText"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignEnd="@+id/usernameText"
         android:textColorHint="#6b6b6b"
-        android:hint="Password" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Attempts Left:"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/editText2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="25dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toEndOf="@+id/textview"
-        android:textSize="25dp"
-        android:layout_toRightOf="@+id/textview" />
+        android:hint="Password"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="login"
-        android:id="@+id/button"
+        android:id="@+id/loginButton"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/textview"
-        android:layout_toStartOf="@+id/textview" />
+        android:layout_toStartOf="@+id/textview"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/button2"
+        android:id="@+id/cancelButton"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/textview"
-        android:layout_toEndOf="@+id/textview" />
+        android:layout_toEndOf="@+id/textview"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
