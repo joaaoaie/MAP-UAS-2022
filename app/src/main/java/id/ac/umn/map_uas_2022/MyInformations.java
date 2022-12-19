@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MyInformations extends Fragment {
+    String username;
 
     ImageView profilePicture;
     TextView displayName;
@@ -28,11 +29,10 @@ public class MyInformations extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        String username = requireArguments().getString("username");
+        this.username = requireArguments().getString("username");
 
         // take name from database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("User/" + username + "/name");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("User/" + username + "/name");
         myRef.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 Log.e("firebase", "Error getting data", task.getException());
@@ -63,6 +63,7 @@ public class MyInformations extends Fragment {
         settingsButton = (ImageButton) requireView().findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MyInformationsSettings.class);
+            intent.putExtra("username", username);
             startActivity(intent);
         });
     }
